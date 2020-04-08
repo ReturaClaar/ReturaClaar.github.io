@@ -135,8 +135,8 @@
 
 
           // create a variable for your markup and add it to the map 
-          var marker = 'markerGreen4'({
-              color: 'blue'
+          var marker = new mapboxgl.Marker({
+              color: 'green'
             })
             .setLngLat([row.Longitude, row.Latitude])
             .setPopup(popup)
