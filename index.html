@@ -2,9 +2,8 @@
 <html>
   <head>
     <meta charset='utf-8' />
-    <title>SF Plants!</title>
-    <meta name="description" content="Plant shops and nurseries in San Francisco">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SF Plants</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' />
     <style>
@@ -31,7 +30,6 @@
       center: [-122.441, 37.771], // starting position [lng, lat]
       zoom: 12.1, // starting zoom
     });
-
     // code from the next step will go here
     map.on('click', function(e) {
   var features = map.queryRenderedFeatures(e.point, {
@@ -46,7 +44,7 @@
 
   var popup = new mapboxgl.Popup({ offset: [0, -15] })
     .setLngLat(feature.geometry.coordinates)
-    .setHTML('<h3>' + feature.properties.title + '</h3>' + '<p>' + feature.properties.description + '</p>')
+    .setHTML('<h3>' + feature.properties.title + '</h3><p>' + feature.properties.description + '</p>')
     .addTo(map);
 });
     </script>
