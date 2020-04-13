@@ -19,36 +19,275 @@
         bottom: 0;
         width: 100%;
       }
+
+      .marker {
+  background-image: url('markerGreen4copy.png');
+  background-size: cover;
+  width: 16px;
+  height: 22px;
+  border: none;
+  cursor: pointer;
+}
+
+.mapboxgl-popup {
+  max-width: 500px;
+}
+
+.mapboxgl-popup-content {
+  text-align: left;
+  font-family: 'Helvetica', sans-serif;
+  padding-left: 25px;
+  padding-right: 25px;
+}
     </style>
-  </head>
-  <body>
-    <div id='map'></div>
-    <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoicmNsYWFyIiwiYSI6ImNrOHRvZ282NDAyZ2wzcW51bDk1dW54bzkifQ.mBbeDRfd-Y_zmQE2XtUx1w'; // replace this with your access token
-    var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/rclaar/ck8qcje9x02zx1ioinn7c2ssy', // replace this with your style URL
-      center: [-122.441, 37.771], // starting position [lng, lat]
-      zoom: 12.1, // starting zoom
-    });
+</head>
+<body>
 
-    // code from the next step will go here
-    map.on('click', function(e) {
-  var features = map.queryRenderedFeatures(e.point, {
-    layers: ['planty-sf'] // replace this with the name of the layer
-  });
+<div id='map'></div>
 
-  if (!features.length) {
-    return;
-  }
+<script>
 
-  //var feature = features[0];
+mapboxgl.accessToken = 'pk.eyJ1IjoicmNsYWFyIiwiYSI6ImNrOHRvZ282NDAyZ2wzcW51bDk1dW54bzkifQ.mBbeDRfd-Y_zmQE2XtUx1w';
 
-  var popup = new mapboxgl.Popup({ offset: [0, -15] })
-    .setLngLat(feature.geometry.coordinates)
-    .setHTML('<h3>' + feature.properties.title + '</h3>' + '<p>' + feature.properties.description + '</p>')
+var map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/rclaar/ck8qcje9x02zx1ioinn7c2ssy',
+  center: [-122.441, 37.770], // starting position [lng, lat]
+  zoom: 12.1, // starting zoom
+});
+
+
+
+// code from the next step will go here!
+var geojson = {
+  type: 'FeatureCollection',
+  features: [{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.421567, 37.759633]
+    }, 
+    properties: {
+      title: 'Paxton Gate',
+      description: '<p> <a href="https://www.paxtongate.com" target="_blank" title="Opens in a new window">www.paxtongate.com</a></p>' + '<p> <a href="https://www.instagram.com/paxtongate" target="_blank" title="Opens in a new window">@paxtongate</a></p>' + '<p> <a href="https://www.gofundme.com/f/paxton-gate-employee-relief-fund" target="_blank" title="Opens in a new window">Paxton Gate Employee Relief Fund</a></p>' + '<p><a href="tel:4158241872">(415) 824-1872</a></p>'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.417426, 37.766390]
+    },
+    properties: {
+      title: 'Roots San Francisco',
+      description: '<p> <a href="https://rootsinsf.com/" target="_blank" title="Opens in a new window">www.rootsinsf.com</a></p>' + '<p><a href="tel:4158171592">(415) 817-1592</a></p>'
+    }
+  },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.435082, 37.759856]
+    },
+    properties: {
+      title: 'Hortica',
+      description: '<p> <a href="https://www.yelp.com/biz/hortica-san-francisco" target="_blank" title="Opens in a new window">www.yelp.com/biz/hortica-san-francisco</a></p>' + '<p><a href="tel:4158634697">(415) 863-4697</a></p>'
+    }
+},
+{
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.428687, 37.767480]
+    },
+    properties: {
+      title: 'Plant Therapy',
+      description: '<p> <a href="https://www.planttherapysf.com/" target="_blank" title="Opens in a new window">www.planttherapysf</a></p>' + '<p> <a href="https://www.instagram.com/planttherapysf/" target="_blank" title="Opens in a new window">@planttherapysf</a></p>' + '<p><a href="tel:4157803335">(415) 780-3335</a></p>'
+    }
+    },
+    {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.376975, 37.740686]
+    },
+    properties: {
+      title: 'Bay Natives Nursery',
+      description: '<p> <a href="http://www.baynatives.com/" target="_blank" title="Opens in a new window">www.baynatives.com</a></p>' + '<p><a href="tel:4152876755">(415) 287-6755</a></p>'
+    }
+    },
+        {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.390374, 37.739592]
+    },
+    properties: {
+      title: 'Flora Grubb Gardens',
+      description: '<p> <a href="https://www.floragrubb.com/" target="_blank" title="Opens in a new window">www.floragrubb.com</a></p>' + '<p> <a href="https://www.instagram.com/floragrubbgardens" target="_blank" title="Opens in a new window">@floragrubbgardens</a></p>' + '<p><a href="tel:4156267256">(415) 626-7256</a></p>'
+    }
+    },
+            {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.407472, 37.739093]
+    },
+    properties: {
+      title: 'Flowercraft Garden Center',
+      description: '<p> <a href="https://www.flowercraftgc.com/" target="_blank" title="Opens in a new window">www.flowercraftgc.com</a></p>' + '<p> <a href="https://www.instagram.com/flowercraftgc/" target="_blank" title="Opens in a new window">@flowercraftgc</a></p>' + '<p><a href="tel:4158241900">(415) 824-1900</a></p>'
+    }
+    },
+        {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.417601, 37.739078]
+    },
+    properties: {
+      title: 'Succulence',
+      description: '<p> <a href="https://www.thesucculence.com/" target="_blank" title="Opens in a new window">www.thesucculence.com</a></p>' + '<p> <a href="https://www.instagram.com/thesucculence/" target="_blank" title="Opens in a new window">@thesucculence</a></p>' + '<p><a href="tel:4152822212">(415) 282-2212</a></p>'
+    }
+    },
+            {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.422398, 37.806066]
+    },
+    properties: {
+      title: 'Succulence at Ghirardelli Square',
+      description: '<p> <a href="https://www.thesucculence.com/" target="_blank" title="Opens in a new window">www.thesucculence.com</a></p>' + '<p> <a href="https://www.instagram.com/thesucculence/" target="_blank" title="Opens in a new window">@thesucculence</a></p>' + '<p><a href="tel:4156553359">(415) 655-3359</a></p>'
+    }
+    },
+        {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.503633, 37.735800]
+    },
+    properties: {
+      title: 'Sloat Garden Center',
+      description: '<p> <a href="https://www.sloatgardens.com/" target="_blank" title="Opens in a new window">www.sloatgardens.com</a></p>' + '<p> <a href="https://www.instagram.com/sloatgardens/" target="_blank" title="Opens in a new window">@sloatgardens</a></p>' + '<p><a href="tel:4155664415">(415) 566-4415</a></p>'
+    }
+    },
+    {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.461557, 37.782597]
+    },
+    properties: {
+      title: 'Sloat Garden Center',
+      description: '<p> <a href="https://www.sloatgardens.com/" target="_blank" title="Opens in a new window">www.sloatgardens.com</a></p>' + '<p> <a href="https://www.instagram.com/sloatgardens/" target="_blank" title="Opens in a new window">@sloatgardens</a></p>' + '<p><a href="tel:4157521614">(415) 752-1614</a></p>'
+    }
+    },
+    {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.439617, 37.799995]
+    },
+    properties: {
+      title: 'Sloat Garden Center',
+      description: '<p> <a href="https://www.sloatgardens.com/" target="_blank" title="Opens in a new window">www.sloatgardens.com</a></p>' + '<p> <a href="https://www.instagram.com/sloatgardens/" target="_blank" title="Opens in a new window">@sloatgardens</a></p>' + '<p><a href="tel:4154401000">(415) 440-1000</a></p>'
+    }
+    },
+        {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.435018, 37.797043]
+    },
+    properties: {
+      title: 'The Sill',
+      description: '<p> <a href="https://www.thesill.com/" target="_blank" title="Opens in a new window">www.thesill.com</a></p>' + '<p> <a href="https://www.instagram.com/thesill/" target="_blank" title="Opens in a new window">@thesill</a></p>' + '<p><a href="tel:4158729445">(415) 872-9445</a></p>'
+    }
+    },
+            {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.426061, 37.776199]
+    },
+    properties: {
+      title: 'Plants and Friends',
+      description: '<p> <a href="https://www.plantsandfriends.club/" target="_blank" title="Opens in a new window">www.plantsandfriends.club</a></p>' + '<p> <a href="https://www.instagram.com/plantsandfriends/" target="_blank" title="Opens in a new window">@plantsandfriends</a></p>' + '<p> <a href="tel:4159490125">(415) 949-0125</a></p>'
+    }
+    },
+                {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.433382, 37.787310]
+    },
+    properties: {
+      title: 'Plants and Friends',
+      description: '<p> <a href="https://www.plantsandfriends.club/" target="_blank" title="Opens in a new window">www.plantsandfriends.club</a></p>' + '<p> <a href="https://www.instagram.com/plantsandfriends/" target="_blank" title="Opens in a new window">@plantsandfriends</a></p>' + '<p> <a href="tel:4159490125">(415) 949-0125</a></p>'
+    }
+    },
+            {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.420920, 37.790272]
+    },
+    properties: {
+      title: 'SF Plants',
+      description: '<p> <a href="https://www.sfplants.com/" target="_blank" title="Opens in a new window">www.sfplants.com</a></p>' + '<p> <a href="https://www.instagram.com/sfplantsandflowers/" target="_blank" title="Opens in a new window">@sfplantsandflowers</a></p>' + '<p><a href="tel:4154415390">(415) 441-5390</a></p>'
+    }
+    },
+                {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.431918, 37.785176]
+    },
+    properties: {
+      title: 'Katsura Garden',
+      description: '<p> <a href="https://www.yelp.com/biz/katsura-garden-san-francisco" target="_blank" title="Opens in a new window">www.yelp.com/biz/katsura-garden-san-francisco</a></p>' + '<p><a href="tel:4159316209">(415) 931-6209</a></p>'
+    }
+    },
+                {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.415956, 37.785325]
+    },
+    properties: {
+      title: 'Plant Therapy',
+      description: '<p> <a href="https://www.planttherapysf.com/" target="_blank" title="Opens in a new window">www.planttherapysf</a></p>' + '<p> <a href="https://www.instagram.com/planttherapysf/" target="_blank" title="Opens in a new window">@planttherapysf</a></p>' + '<p><a href="tel:4155002037">(415) 500-2037</a></p>'
+    }
+    },
+  {
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-122.419107, 37.760542]
+    },
+    properties: {
+      title: 'The Plant Fairies',
+      description: '<p> <a href="https://www.theplantfairies.com/" target="_blank" title="Opens in a new window">www.theplantfairies.com</a></p>' + '<p> <a href="https://www.instagram.com/theplantfairies/" target="_blank" title="Opens in a new window">@theplantfairies</a></p>' + '<p><a href="tel:4157570263">(415) 757-0263</a></p>'
+    }
+  }]
+};
+
+// add markers to map
+geojson.features.forEach(function(marker) {
+
+  // create a HTML element for each feature
+  var el = document.createElement('div');
+  el.className = 'marker';
+
+  // make a marker for each feature and add to the map
+  new mapboxgl.Marker(el)
+    .setLngLat(marker.geometry.coordinates)
+    .setPopup(new mapboxgl.Popup({ offset: 25 }) // add popups
+      .setHTML('<h3>' + marker.properties.title + '</h3><p>' + marker.properties.description + '</p>'))
     .addTo(map);
 });
-    </script>
-  </body>
+
+</script>
+
+</body>
 </html>
