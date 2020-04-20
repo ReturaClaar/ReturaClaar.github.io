@@ -59,15 +59,6 @@ var map = new mapboxgl.Map({
 
 
 // code from the next step will go here!
-.mapboxgl-popup-title {
-  background: #91c949,
-  color: #fff,
-  margin: 0,
-  display: block,
-  padding: 10px,
-  margin-top: -15px,
-}
-
 var geojson = {
   type: 'FeatureCollection',
   features: [{
@@ -77,7 +68,14 @@ var geojson = {
       coordinates: [-122.421567, 37.759633]
     }, 
     properties: {
-      title: 'Paxton Gate',
+      title: 'Paxton Gate'{
+        background: #91c949,
+        color: #fff,
+        margin: 0,
+        display: block,
+        padding: 10px,
+        margin-top: -15px,
+      }
       description: '<p> <a href="https://www.paxtongate.com" target="_blank" title="Opens in a new window">www.paxtongate.com</a></p>' + '<p> <a href="https://www.instagram.com/paxtongate" target="_blank" title="Opens in a new window">@paxtongate</a></p>' + '<p> <a href="https://www.gofundme.com/f/paxton-gate-employee-relief-fund" target="_blank" title="Opens in a new window">Paxton Gate Employee Relief Fund</a></p>' + '<p><a href="tel:4158241872">(415) 824-1872</a></p>'
     }
   },
